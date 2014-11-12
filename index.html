@@ -1,16 +1,83 @@
 <html>
-     <head>
-	  <title>Tableizer</title>
-	  <script
-	       src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	  <script src="js/tableizer.js"></script>
-     </head>
+  <head>
+    <title>Tableizer</title>
+    <link rel="stylesheet" href="http://www.w3.org/StyleSheets/Core/Modernist" 
+      type="text/css">
+    <style>
+      p {
+        width: 75%;
+      }
+    </style>
+    <script
+      src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+    </script>
+    <script> 
+    $(document).on("ready", function(){
+      $("#btia").click( function() {
+        // textarea content
+        var $table = $("<table/>");
+        var content = $("#excel").val();
+        var rows = content.split("\n");
 
-     <body>
-	  <textarea id="excel"></textarea>
-	  <button id="btia">Tableizer</button>
+        rows.forEach(function(row) {
+          var $row = $("<tr/>");
+          var cells = row.split("\t");
+          cells.forEach(function(cell) {
+            var $cell = $("<td/>").text(cell);
+            $row.append($cell);
+          });
+          $table.append($row);
+        });
+        $("#render-area").html($table);
+      });
+    });
+    </script>
+  </head>
 
-	  <div id="render-area">
-	  </div>
-     </body>
+  <body>
+    <h1>TABLEIZER</h1>
+    <hr/>
+
+    <p>A table builder from tabulated data. Javascript version of 
+    <a href="http://tableizer.journalistopia.com/">
+    tableizer.journalistopia.com</a></p>
+
+    <p>It's a small jQuery exercise to generate tables from MS Excel copy-pasted 
+    data.</p>
+
+    <p>
+    This is free and unencumbered software released into the public domain.
+    </p><p>
+    Anyone is free to copy, modify, publish, use, compile, sell, or
+    distribute this software, either in source code form or as a compiled
+    binary, for any purpose, commercial or non-commercial, and by any
+    means.
+    </p><p>
+    In jurisdictions that recognize copyright laws, the author or authors
+    of this software dedicate any and all copyright interest in the
+    software to the public domain. We make this dedication for the benefit
+    of the public at large and to the detriment of our heirs and
+    successors. We intend this dedication to be an overt act of
+    relinquishment in perpetuity of all present and future rights to this
+    software under copyright law.
+    </p><p>
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+    OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+    OTHER DEALINGS IN THE SOFTWARE.
+    </p><p>
+    For more information, please refer to <a href="http://unlicense.org">
+    [http://unlicense.org]</a>
+    </p>
+
+    <form>
+      <textarea id="excel"></textarea>
+      <button id="btia">Tableizer</button>
+    </form>
+    <div id="render-area">
+    </div>
+  </body>
 </html>
